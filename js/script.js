@@ -13,7 +13,7 @@ Tags....:
 ///////////////////////////////////////////////////////////////////////////////////////////////
 const quotes = [
   {//(0,1) - (Index, Quote Number)
-    quote: '[...] The ability to both] abstain from and enjoy those things which many are too weak to abstain from and cannot enjoy without excess, but to be strong enough to both bear the one and be sober in the other is the mark of a perfect, invincible soul.',
+    quote: '[... The ability to both] abstain from and enjoy those things which many are too weak to abstain from and cannot enjoy without excess, but to be strong enough to both bear the one and be sober in the other is the mark of a perfect, invincible soul.',
     source: 'Marcus Aurelius',
     citation: 'Meditations',
     year: 175,
