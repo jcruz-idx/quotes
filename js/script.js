@@ -1,20 +1,19 @@
-/******************************************
-Treehouse FSJS Techdegree:
-project 1 - A Random Quote Generator
-******************************************/
+/*<!--
+//2022.03.09A – quotes - script.js
+///////////////////////////////////////////////////////////////////////////////////////////////
+Project.: Treehouse FSJS Techdegree: project 1 - A Random Quote Generator
+Desc....: Show quotes randomly from an array of 'quote' objects
+Filename: script.js
+Dev.....: Joel Cruz
+Tags....: 
+/////////////////////////////////////////////////////////////////////////////////////////////*/
 
-// For assistance: 
-  // Check the "Project Resources" section of the project instructions
-  // Reach out in your Slack community - https://treehouse-fsjs-102.slack.com/app_redirect?channel=chit-chat
 
-/*** 
- * `quotes` array 
-***/
-
-//2022.03.08A - Write, test `quotes` array
+//Define `quotes` Array (i.e. quote database)
+///////////////////////////////////////////////////////////////////////////////////////////////
 const quotes = [
-  {//(1)
-    quote: '[... The ability to both] abstain from and enjoy those things which many are too weak to abstain from and cannot enjoy without excess, but to be strong enough to both bear the one and be sober in the other is the mark of a perfect, invincible soul.',
+  {//(0,1) - (Index, Quote Number)
+    quote: '[...] The ability to both] abstain from and enjoy those things which many are too weak to abstain from and cannot enjoy without excess, but to be strong enough to both bear the one and be sober in the other is the mark of a perfect, invincible soul.',
     source: 'Marcus Aurelius',
     citation: 'Meditations',
     year: 175,
@@ -83,16 +82,32 @@ const quotes = [
   },
 ];
 
-//RNG - Returns integer between integers [min,max] (inclusive)
+
+//Initialization
+///////////////////////////////////////////////////////////////////////////////////////////////
+let rIndex=0; //Random index for `quotes` array
+let track=[]; //Track indices used
+
+
+//FUNCTION - rng() - integer=f(integer,integer)
+///////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Returns a random integer between [min,max] (inclusive).
+ *
+ * @param {int} min=1 RNG’s lower bound.
+ * @param {int} max=10 RNG’s upper bound.
+ * @returns {int} A random integer between [min,max] (inclusive).
+ */
 const rng = (min=1,max=10) => Math.floor( Math.random()*(max-min+1)+min );
 
-//Initialize Variables
-let rIndex=0;
-let track=[]; //Track indices of quotes shown
 
-/***
- * `getRandomQuote` function
-***/
+//FUNCTION - getRandomQuote() - quoteObject=f()
+///////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Tracks quotes shown. Returns a random quote object from the `quotes` array without repeating until all quotes have been shown once. Reset tracking array. Repeat.
+ *
+ * @returns {object} A random quote object from the `quotes` array
+ */
 function getRandomQuote() {
   rIndex=rng(0,quotes.length-1); //Random index value for quotes[]
   
@@ -101,18 +116,22 @@ function getRandomQuote() {
   track.push(rIndex);
   if(track.length===quotes.length) track=[];
 
-  console.log(rIndex, quotes[rIndex])
   return quotes[rIndex];
 }
 
-/***
- * `printQuote` function
-***/
+
+//FUNCTION - printQuote() - f()
+///////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Creates HTML markup for quote, including attribution information. Changes background color for every new quote. Sets automatic update timer/interval. Prints to `quote-box` inner HTML.
+ */
 function printQuote(){
   const Obj=getRandomQuote();
   let HTML='';
 
-  //Markup quote string
+  /*Markup for quote string
+    -Added `Year: ` string to the year <span> avoid confusion given that some quotes are from the year 175, a number some people may not recognize as a year.
+    -Added `Tag: ` string to the tag <span> to avoid confusion*/
   html=`<p class="quote">${Obj.quote}</p>\
   <p class="source">${Obj.source}`;
   if(Obj.citation) html+=`<span class="citation">${Obj.citation}</span>`;
@@ -128,20 +147,28 @@ function printQuote(){
   document.body.style.backgroundColor=
   `rgb(${rng(1,255)},${rng(1,255)},${rng(1,255)})`;
 
+  //Print
   document.getElementById('quote-box').innerHTML=html;
 
-  //Reset interval - In case user, clicks `Show another quote` button toward end of interval
+  //Reset interval - User may click `Show another quote` button toward end of previous interval
   clearInterval(intervalID);
   intervalID=setInterval(printQuote, 20000);
 }
+
+
+//Main Code Block
+///////////////////////////////////////////////////////////////////////////////////////////////
 
 //Adopted from: https://developer.mozilla.org/en-US/docs/Web/API/setInterval
 //Change quote every 20 seconds, reset after every printQuote call
 let intervalID=setInterval(printQuote, 20000);
 
-/***
- * click event listener for the print quote button
- * DO NOT CHANGE THE CODE BELOW!!
-***/
-
+/* Unchanged from Team Treehouse starter files
+   click event listener for the print quote button
+   DO NOT CHANGE THE CODE BELOW!!*/
 document.getElementById('load-quote').addEventListener("click", printQuote, false);
+
+/*/////////////////////////////////////////////////////////////////////////////////////////////
+changelog - quotes - script.js
+03.09A: Initial production
+/////////////////////////////////////////////////////////////////////////////////////////////*/
