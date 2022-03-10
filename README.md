@@ -1,6 +1,6 @@
-Markdown Template adapted from [makeareadme.com](makeareadme.com)
+https://jcruz-idx.github.io/quotes/
 
-# quotes
+# Project: Quotes
 Team Treehouse Techdegree Project 1: Random Quote Generator
 
 # Description
@@ -25,3 +25,5 @@ Please make sure to update tests as appropriate.
 
 ## License
 ???
+
+Markdown Template adapted from [makeareadme.com](makeareadme.com)
